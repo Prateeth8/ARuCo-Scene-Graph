@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Localization Using Spatial Scene Graphs</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #fff;
+        }
+        
+        /* Header Block */
+        .title-block {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5em;
+            color: #222;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+        .conference {
+            font-size: 1.2em;
+            color: #d9534f;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .authors {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .author-link {
+            color: #0066cc;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .author-link:hover {
+            text-decoration: underline;
+        }
+        .affiliations {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        /* Quick Links */
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #363636;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .btn:hover {
+            background-color: #555;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 50px;
+        }
+        .section h2 {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #222;
+        }
+        p {
+            font-size: 1.1em;
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+        ul {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Figures & Images */
+        .figure-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .figure-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .caption {
+            font-size: 0.95em;
+            color: #666;
+            margin-top: 15px;
+            text-align: center;
+            padding: 0 20px;
+            font-style: italic;
+        }
+
+        /* BibTeX Block */
+        .bibtex-block {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="title-block">
+        <h1>Visual Localization Using Spatial Scene Graphs</h1>
+        <div class="conference">Research, Innovation, Society and Entrepreneurship 2026 (RISE 2026)</div>
+        
+        <div class="authors">
+            <a href="mailto:prateeth.rao@iiitb.ac.in" class="author-link">PRATEETH RAO</a> &amp; 
+            <a href="mailto:sachit@iiitb.ac.in" class="author-link">SACHIT RAO</a>
+        </div>
+        
+        <div class="affiliations">
+            Robotics Studio
+        </div>
+        
+        <div class="links">
+            <a href="#" class="btn">📄 Paper (In Preparation)</a>
+            <a href="#" class="btn">💻 Code</a>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Introduction</h2>
+        <p>
+            Visual Localization enables a robot to estimate and correct its pose within a 2D/3D environment during navigation or autonomous operation. In Simultaneous Localization and Mapping (SLAM) systems, visual localization plays a critical role in detecting loop closures, which are essential for reducing drift and improving global consistency through Pose Graph Optimization (PGO).
+        </p>
+        <p>
+            Over the years, several approaches have been proposed for loop closure detection and visual localization. Traditional methods rely on Bag-of-Visual-Words (BoVW) representations that require a pre-constructed visual dictionary for image retrieval. More recent approaches leverage deep learning–based global descriptors, such as NetVLAD, to compute image similarities in a learned embedding space.
+        </p>
+
+        <div class="figure-container">
+            <img src="images/Scene_graphs_spatial.png" alt="Spatial Scene Graphs Generation">
+            <div class="caption">Figure 1: Spatial Scene Graphs Generation</div>
+        </div>
+
+        <p>
+            More recently, scene graph–based representations have emerged as a promising direction for structured environment understanding. Scene graphs encode spatial relationships between objects and landmarks, enabling robust place recognition beyond appearance-based matching.
+        </p>
+        <p>
+            This work presents a detailed analysis of Spatial Scene Graph generation using ARuCo fiducial markers to construct a Global ARuCo Scene Graph representation of the environment. The proposed representation captures spatial relationships between markers, enabling robust loop closure detection even under viewpoint variations. The performance of this graph-based localization approach is evaluated and compared against NetVLAD-based image similarity methods for visual place recognition.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Spatial Scene Graphs Generation</h2>
+        <p>
+            Visual scenes can be represented as structured graphs that encode objects and their spatial relationships. In this work, we construct a Spatial Scene Graph centered around ARuCo fiducial markers to enable robust visual localization and loop closure detection.
+        </p>
+        <p>
+            Given an input scene image $I$ and the corresponding depth map $D$, the generated scene graph is defined as:
+        </p>
+        
+        $$\mathcal{G}_S = \{\mathcal{N}_S, \mathcal{E}_S\}$$
+
+        <ul>
+            <li>$\mathcal{N}_S = \{n_1, n_2, \ldots, n_k, n_A\}$ is the node set representing objects detected in the scene, where $n_i$ denotes the $i$-th object extracted using the SAM-3 segmentation model from prompts generated by a Visual Question Answering (VQA) module, and $n_A$ denotes the detected ARuCo fiducial marker obtained using OpenCV ARuCo detection.</li>
+            <li>$\mathcal{P}_S = \{p_1, p_2, \ldots, p_k\}$ is the set of spatial positions of the detected objects, where each $p_i = (x_i, y_i, z_i)$ is computed using the depth map $D$ derived from the input image.</li>
+            <li>$\mathcal{E}_S = \{e_{i,j}\}$ is the edge set representing spatial proximity relationships between nodes. Each edge:
+                $$e_{i,j} = \langle n_i, r_{i,j}, n_j \rangle$$
+                denotes a spatial relation between nodes $n_i$ and $n_j$, where $r_{i,j}$ is defined based on the Euclidean distance:
+                $$d_{i,j} = \|p_i - p_j\|_2$$
+            </li>
+            <li>The ARuCo marker node $n_A$ acts as the central reference node in the graph, and proximity edges are computed between $n_A$ and all detected scene objects.</li>
+        </ul>
+
+        <p>
+            Thus, the final Spatial Scene Graph encodes the structural relationships between scene objects and the ARuCo marker, enabling robust scene representation for visual localization.
+        </p>
+
+        <div class="figure-container">
+            <img src="images/res_spatial.png" alt="A General Block Diagram of the Procedure of ARuCo Scene Graph Generation">
+            <div class="caption">Figure 2: A General Block Diagram of the Procedure of ARuCo Scene Graph Generation</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Results</h2>
+        <p>
+            Figure 2 illustrates the prerequisites for constructing the scene graph and estimating object positions, with the ARuCo marker serving as the primary reference node. Figure 3 presents the intermediate outputs of the pipeline, including instance masks from the SAM3 model, ARuCo detection using OpenCV, depth maps from the Distill Any Depth model, and prompts generated by the VLM.
+        </p>
+
+        <div class="figure-container">
+            <img src="images/res_spatial_out.png" alt="Outputs from various model to generate Local Scene Graphs">
+            <div class="caption">Figure 3: Outputs from various model to generate Local Scene Graphs</div>
+        </div>
+
+        <p>
+            Figure 4 compares the globally generated scene graph with the NetVLAD-based similarity matrix, both utilized for visual place recognition within the 3D reconstruction pipeline.
+        </p>
+
+        <div class="figure-container">
+            <img src="images/out_res_comp_spatial.png" alt="Spatial Scene Graphs vs NetVlad Similarity Matrix">
+            <div class="caption">Figure 4: Spatial Scene Graphs vs NetVlad Similarity Matrix</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Citation</h2>
+        <p>If you find this work useful for your research, please consider citing it once published:</p>
+        <div class="bibtex-block">
+@unpublished{rao2026visual,
+  title={Visual Localization Using Spatial Scene Graphs},
+  author={Rao, Prateeth and Rao, Sachit},
+  note={Poster Work},
+  year={2026}
+}
+        </div>
+    </div>
+
+</body>
+</html>
